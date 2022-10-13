@@ -18,4 +18,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdminDashboard.BLL\AdminDashboard.BLL.csproj" />
+  </ItemGroup>
+
 </Project>
