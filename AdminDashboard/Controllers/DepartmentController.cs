@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AdminDashboard.BLL.Repository;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,11 @@ namespace AdminDashboard.Controllers
 {
     public class DepartmentController : Controller
     {
+        DepartmentRep department = new DepartmentRep();
         public IActionResult Index()
         {
-            return View();
+            var data = department.Get();
+            return View(data);
         }
     }
 }
