@@ -46,7 +46,7 @@ namespace AdminDashboard.BLL.Repository
             var Data = db.Departments.Where(x=>x.Id==id).Select(x => new DepartmentsVM { Id = x.Id, Name = x.Name, Code = x.Code }).FirstOrDefault();
             return Data;
         }
-
+         
         public void Update(DepartmentsVM model)
         {
             var OldData = db.Departments.Find(model.Id);

@@ -1,0 +1,28 @@
+﻿@model AdminDashboard.BLL.Models.DepartmentsVM
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete Department</h2>
+
+<br />
+<center>
+    Are you sure to delete this department !
+</center>
+<br />
+<form class="form-control" asp-action="Delete" asp-controller="Department" method="post">
+
+    <input type="hidden" asp-for="Id" />
+    <label for="DepartmentName">Department Name</label>
+    <input type="text" class="form-control" id="DepartmentName" name="Name" value="" />
+    <br />
+    <label for="DepartmentCode">Department Code</label>
+    <input type="text" class="form-control" id="DepartmentCode" name="Code" value="" />
+
+    <center>
+
+        <input type="submit" class="btn btn-danger" value="Delete" />
+    </center>
+
+</form>
