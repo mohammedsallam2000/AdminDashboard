@@ -13,7 +13,7 @@
     <label for="DepartmentName">Department Name</label>
     <input type="text" class="form-control" id="DepartmentName" name="Name" value="" />
     <span asp-validation-for="Name" class="text-danger"></span>
-    <br />
+    <br /><br />
     <label for="DepartmentCode">Department Code</label>
     <input type="text" class="form-control" id="DepartmentCode" name="Code" value="" />
     <span asp-validation-for="Code" class="text-danger"></span>
@@ -22,11 +22,11 @@
 
         <input type="submit" class="btn btn-primary" value="Save" />
     </center>
-        
+
 </form>
 
-@section JqueryValidation{
-
+@*@section JqueryValidation{*@
+    <script src="~/plugins/jquery/jquery.min.js"></script>
     <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
     <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}
+@*}*@

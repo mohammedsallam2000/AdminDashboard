@@ -1,20 +1,20 @@
 ﻿@model AdminDashboard.BLL.Models.DepartmentsVM
 
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "Edit";
 }
 
 <h2>Edit Department</h2>
 
-<form class="form-control" asp-action="Edit" asp-controller="Department" method="post">
+<form class="form-control" asp-action="Update" asp-controller="Department" method="post">
 
-    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Id" /><br />
     <label for="DepartmentName">Department Name</label>
-    <input type="text" class="form-control" id="DepartmentName" name="Name" value="" />
+    <input type="text" class="form-control" id="DepartmentName" name="Name" value="@Model.Name" />
     <span asp-validation-for="Name" class="text-danger"></span>
     <br />
     <label for="DepartmentCode">Department Code</label>
-    <input type="text" class="form-control" id="DepartmentCode" name="Code" value="" />
+    <input type="text" class="form-control" id="DepartmentCode" name="Code" value="@Model.Code" />
     <span asp-validation-for="Code" class="text-danger"></span>
 
     <center>

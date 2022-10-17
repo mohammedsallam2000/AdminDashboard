@@ -15,10 +15,10 @@
 
     <input type="hidden" asp-for="Id" />
     <label for="DepartmentName">Department Name</label>
-    <input type="text" class="form-control" id="DepartmentName" name="Name" value="" />
+    <input type="text" class="form-control" id="DepartmentName" name="Name" value="@Model.Name" disabled />
     <br />
     <label for="DepartmentCode">Department Code</label>
-    <input type="text" class="form-control" id="DepartmentCode" name="Code" value="" />
+    <input type="text" class="form-control" id="DepartmentCode" name="Code" value="@Model.Code" disabled/>
 
     <center>
 
