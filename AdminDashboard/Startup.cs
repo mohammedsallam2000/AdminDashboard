@@ -1,5 +1,9 @@
+using AdminDashboard.BLL.Repository;
+using AdminDashboard.BLL.Repository.DepartmentRepo;
+using AdminDashboard.DAL.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +27,13 @@ namespace AdminDashboard
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //To get Connection String
+            services.AddDbContextPool<AdminDashboardContext>(opts =>
+            opts.UseSqlServer(Configuration.GetConnectionString("AdminDashboardConnection")));
+
+
+            services.AddScoped<IDepartmentRep, DepartmentRep>();
+             
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

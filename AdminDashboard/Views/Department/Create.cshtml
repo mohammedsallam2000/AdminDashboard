@@ -7,17 +7,18 @@
 
 <h2>Create Department</h2>
 
-<form class="form-control" asp-action="Create" asp-controller="Department" method="post">
+<form  asp-action="Create" asp-controller="Department" method="post">
 
-
+    <br />
     <label for="DepartmentName">Department Name</label>
+
     <input type="text" class="form-control" id="DepartmentName" name="Name" value="" />
     <span asp-validation-for="Name" class="text-danger"></span>
     <br /><br />
     <label for="DepartmentCode">Department Code</label>
     <input type="text" class="form-control" id="DepartmentCode" name="Code" value="" />
     <span asp-validation-for="Code" class="text-danger"></span>
-
+    <br />
     <center>
 
         <input type="submit" class="btn btn-primary" value="Save" />

@@ -10,12 +10,17 @@ namespace AdminDashboard.DAL.Database
 {
     public class AdminDashboardContext : DbContext
     {
+
+        public AdminDashboardContext(DbContextOptions<AdminDashboardContext> opt) : base(opt)
+        {
+
+        }
         public DbSet<Departments> Departments { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("server=.;database=AdminDashboardDB;integrated security =true");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("server=.;database=AdminDashboardDB;integrated security =true");
+        //}
     }
 }

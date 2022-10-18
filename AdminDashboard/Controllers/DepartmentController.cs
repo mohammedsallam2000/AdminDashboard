@@ -1,5 +1,6 @@
 ﻿using AdminDashboard.BLL.Models;
 using AdminDashboard.BLL.Repository;
+using AdminDashboard.BLL.Repository.DepartmentRepo;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,12 @@ namespace AdminDashboard.Controllers
 {
     public class DepartmentController : Controller
     {
-        DepartmentRep department = new DepartmentRep();
+        // Losly Coupled
+        private readonly IDepartmentRep department;
+        public DepartmentController(IDepartmentRep department)
+        {
+            this.department = department;
+        }
         public IActionResult Index()
         {
             var data = department.Get();
@@ -82,12 +88,9 @@ namespace AdminDashboard.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+
                     department.Delete(model.Id);
                     return RedirectToAction("Index");
-                }
-                return View(model);
             }
             catch (Exception)
             {

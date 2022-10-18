@@ -12,7 +12,12 @@ namespace AdminDashboard.BLL.Repository
 {
     public class DepartmentRep : IDepartmentRep
     {
-        AdminDashboardContext db = new AdminDashboardContext();
+        private readonly AdminDashboardContext db;
+
+        public DepartmentRep(AdminDashboardContext db)
+        {
+            this.db = db;
+        }
         public void Create(DepartmentsVM model)
         {
             Departments obj = new Departments();

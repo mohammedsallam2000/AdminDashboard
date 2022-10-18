@@ -6,7 +6,7 @@
 
 <h2>Edit Department</h2>
 
-<form class="form-control" asp-action="Update" asp-controller="Department" method="post">
+<form  asp-action="Update" asp-controller="Department" method="post">
 
     <input type="hidden" asp-for="Id" /><br />
     <label for="DepartmentName">Department Name</label>
@@ -16,7 +16,7 @@
     <label for="DepartmentCode">Department Code</label>
     <input type="text" class="form-control" id="DepartmentCode" name="Code" value="@Model.Code" />
     <span asp-validation-for="Code" class="text-danger"></span>
-
+    <br />
     <center>
 
         <input type="submit" class="btn btn-primary" value="Edit" />
