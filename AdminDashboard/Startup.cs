@@ -1,5 +1,7 @@
+using AdminDashboard.BLL.AutoMapper;
 using AdminDashboard.BLL.Repository;
 using AdminDashboard.BLL.Repository.DepartmentRepo;
+using AdminDashboard.BLL.Repository.EmployeeRep;
 using AdminDashboard.DAL.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,9 +33,11 @@ namespace AdminDashboard
             services.AddDbContextPool<AdminDashboardContext>(opts =>
             opts.UseSqlServer(Configuration.GetConnectionString("AdminDashboardConnection")));
 
+            services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
 
             services.AddScoped<IDepartmentRep, DepartmentRep>();
-             
+            services.AddScoped<IEmployeeRep, EmployeeRep>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

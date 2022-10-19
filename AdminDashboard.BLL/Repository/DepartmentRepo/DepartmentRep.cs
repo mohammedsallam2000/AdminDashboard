@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdminDashboard.BLL.Repository
 {
@@ -18,12 +19,9 @@ namespace AdminDashboard.BLL.Repository
         {
             this.db = db;
         }
-        public void Create(DepartmentsVM model)
+        public void Create(Departments model)
         {
-            Departments obj = new Departments();
-            obj.Name = model.Name;
-            obj.Code = model.Code;
-            db.Departments.Add(obj);
+            db.Departments.Add(model);
             db.SaveChanges();
         }
 
@@ -35,29 +33,29 @@ namespace AdminDashboard.BLL.Repository
 
         }
 
-        public void Delete(DepartmentsVM model)
+        public void Delete(Departments model)
         {
-            throw new NotImplementedException();
+            db.Departments.Remove(model);
+            db.SaveChanges();
         }
 
-        public IEnumerable<DepartmentsVM> Get()
+        public IEnumerable<Departments> Get()
         {
-            var Data = db.Departments.Select(x => new DepartmentsVM { Id = x.Id, Name = x.Name, Code = x.Code });
+            var Data = db.Departments.Select(x => x);
             return Data;
         }
 
-        public DepartmentsVM GetById(int id)
+        public Departments GetById(int id)
         {
-            var Data = db.Departments.Where(x=>x.Id==id).Select(x => new DepartmentsVM { Id = x.Id, Name = x.Name, Code = x.Code }).FirstOrDefault();
+            var Data = db.Departments.Where(x=>x.Id==id).FirstOrDefault();
             return Data;
         }
          
-        public void Update(DepartmentsVM model)
+        public void Update(Departments model)
         {
-            var OldData = db.Departments.Find(model.Id);
-            OldData.Name = model.Name;
-            OldData.Code = model.Code;
+            db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
         }
+
     }
 }

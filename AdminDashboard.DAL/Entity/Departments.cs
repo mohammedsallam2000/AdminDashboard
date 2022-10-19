@@ -16,5 +16,7 @@ namespace AdminDashboard.DAL.Entity
         public string Name { get; set; }
         [StringLength(50)] // Constrain
         public string Code { get; set; }
+
+        public ICollection<Employee> Employee { get; set; }
     }
 }

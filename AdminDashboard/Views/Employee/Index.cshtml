@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AdminDashboard.BLL.Models.EmployeeVM>
+@{
+    ViewBag.Title = "Emplyees";
+}
+<center>
+    <h1>All Emplyees</h1>
+
+</center>
+<br />
+<br />
+<a asp-action="Create" asp-controller="Employee" class="btn btn-info">Create New Employee</a>
+<br />
+<br />
+<table class="table table-hover table-striped table-responsive table-condensed table-bordered text-center">
+    <tr style="background-color:cadetblue; text-align:center">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Salary</th>
+        <th>Department</th>
+        <th>Actions</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.Id</td>
+    <td>@item.Name</td>
+    <td>@item.Salary</td>
+    <td>@item.Departments.Name</td>
+
+    <td>
+        <a asp-action="Details" asp-controller="Employee" asp-route-id="@item.Id" class="btn btn-success">Details</a>
+        <a asp-action="Edit" asp-controller="Employee" asp-route-id="@item.Id" class="btn btn-info">Edit</a>
+        <a asp-action="Delete" asp-controller="Employee" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+    </td>
+
+
+</tr>
+    }
+</table>
+

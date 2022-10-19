@@ -4,14 +4,16 @@ using AdminDashboard.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminDashboard.DAL.Migrations
 {
     [DbContext(typeof(AdminDashboardContext))]
-    partial class AdminDashboardContextModelSnapshot : ModelSnapshot
+    [Migration("20221019080122_Emplyee")]
+    partial class Emplyee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace AdminDashboard.DAL.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("AdminDashboard.DAL.Entity.Employee", b =>
+            modelBuilder.Entity("AdminDashboard.DAL.Entity.Emplyee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,10 +82,10 @@ namespace AdminDashboard.DAL.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Emplyee");
                 });
 
-            modelBuilder.Entity("AdminDashboard.DAL.Entity.Employee", b =>
+            modelBuilder.Entity("AdminDashboard.DAL.Entity.Emplyee", b =>
                 {
                     b.HasOne("AdminDashboard.DAL.Entity.Departments", "Departments")
                         .WithMany()

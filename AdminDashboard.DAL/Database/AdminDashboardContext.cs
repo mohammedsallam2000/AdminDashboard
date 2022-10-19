@@ -16,6 +16,7 @@ namespace AdminDashboard.DAL.Database
 
         }
         public DbSet<Departments> Departments { get; set; }
+        public DbSet<Employee> Employee { get; set; }
 
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

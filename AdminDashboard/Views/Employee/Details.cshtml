@@ -1,0 +1,21 @@
+﻿@model AdminDashboard.BLL.Models.DepartmentsVM
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Department Details</h2>
+
+<label for="DepartmentName">Department Name</label>
+<input type="text" class="form-control" id="DepartmentName" name="Name" value="@Model.Name" asp-for="Name" disabled />
+<br />
+<label for="DepartmentCode">Department Code</label>
+<input type="text" class="form-control" id="DepartmentCode" name="Code" value="@Model.Code" asp-for="Code" disabled/>
+<br />
+
+<center>
+    <a asp-controller="Department" asp-action="Index" class="btn btn-primary">Back</a>
+    <a asp-controller="Department" asp-action="Update" asp-route-id="@Model.Id" class="btn btn-info">Edit</a>
+    <a asp-controller="Department" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+
+
+</center>

@@ -1,6 +1,6 @@
 ﻿using AdminDashboard.BLL.Models;
-using AdminDashboard.BLL.Repository;
 using AdminDashboard.BLL.Repository.DepartmentRepo;
+using AdminDashboard.BLL.Repository.EmployeeRep;
 using AdminDashboard.DAL.Entity;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +11,20 @@ using System.Threading.Tasks;
 
 namespace AdminDashboard.Controllers
 {
-    public class DepartmentController : Controller
+    public class EmployeeController : Controller
     {
         #region Fields
         // Losly Coupled
+        private readonly IEmployeeRep employee;
         private readonly IDepartmentRep department;
+
         private readonly IMapper mapper;
         #endregion
 
         #region Ctor
-        public DepartmentController(IDepartmentRep department, IMapper mapper)
+        public EmployeeController(IEmployeeRep employee,IDepartmentRep department, IMapper mapper)
         {
+            this.employee = employee;
             this.department = department;
             this.mapper = mapper;
         }
@@ -30,8 +33,8 @@ namespace AdminDashboard.Controllers
         #region Actions
         public IActionResult Index()
         {
-            var data = department.Get();
-            var model = mapper.Map<IEnumerable<DepartmentsVM>>(data);
+            var data = employee.Get();
+            var model = mapper.Map<IEnumerable<EmployeeVM>>(data);
             return View(model);
         }
 
@@ -41,14 +44,14 @@ namespace AdminDashboard.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(DepartmentsVM model)
+        public IActionResult Create(EmployeeVM model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var data = mapper.Map<Departments>(model);
-                    department.Create(data);
+                    var data = mapper.Map<Employee>(model);
+                    employee.Create(data);
                     return RedirectToAction("Index");
                 }
                 return View(model);
@@ -62,28 +65,28 @@ namespace AdminDashboard.Controllers
 
         public IActionResult Details(int id)
         {
-            var data = department.GetById(id);
-            var model = mapper.Map<DepartmentsVM>(data);
+            var data = employee.GetById(id);
+            var model = mapper.Map<EmployeeVM>(data);
             return View(model);
         }
 
 
 
-        public IActionResult Update(int id)
+        public IActionResult Edit(int id)
         {
-            var data = department.GetById(id);
-            var model = mapper.Map<DepartmentsVM>(data);
+            var data = employee.GetById(id);
+            var model = mapper.Map<EmployeeVM>(data);
             return View(model);
         }
         [HttpPost]
-        public IActionResult Update(DepartmentsVM model)
+        public IActionResult Edit(EmployeeVM model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var data = mapper.Map<Departments>(model);
-                    department.Update(data);
+                    var data = mapper.Map<Employee>(model);
+                    employee.Edit(data);
                     return RedirectToAction("Index");
                 }
                 return View(model);
@@ -96,17 +99,17 @@ namespace AdminDashboard.Controllers
 
         public IActionResult Delete(int id)
         {
-            var data = department.GetById(id);
-            var model = mapper.Map<DepartmentsVM>(data);
+            var data = employee.GetById(id);
+            var model = mapper.Map<EmployeeVM>(data);
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(DepartmentsVM model)
+        public IActionResult Delete(EmployeeVM model)
         {
             try
             {
-                var data = mapper.Map<Departments>(model);
-                department.Delete(data);
+                var data = mapper.Map<Employee>(model);
+                employee.Delete(data);
                 return RedirectToAction("Index");
             }
             catch (Exception)

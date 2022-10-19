@@ -11,12 +11,12 @@ namespace AdminDashboard.BLL.Repository.DepartmentRepo
     public interface IDepartmentRep
     {
 
-        IEnumerable<DepartmentsVM> Get();
-        DepartmentsVM GetById(int id);
-        void Create(DepartmentsVM model);
-        void Update(DepartmentsVM model);
+        IEnumerable<Departments> Get();
+        Departments GetById(int id);
+        void Create(Departments model);
+        void Update(Departments model);
         void Delete(int id);
-        void Delete(DepartmentsVM model);
+        void Delete(Departments model);
 
     }
 }
