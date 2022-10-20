@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,10 +38,19 @@ namespace AdminDashboard.BLL.Repository.EmployeeRep
             db.SaveChanges();
         }
 
-        public IEnumerable<Employee> Get()
+        public IEnumerable<Employee> Get(Expression<Func<Employee, bool>> filter = null)
         {
-            var Data = db.Employee.Include("Departments").Select(x => x); // Get All Emplyees and department for each emplyee
-            return Data;
+            if (filter == null )
+            {
+                var Data = db.Employee.Include("Departments").Select(x => x); // Get All Emplyees and department for each emplyee
+                return Data;
+            }
+            else
+            {
+                var Data = db.Employee.Include("Departments").Where(filter); // Get All Emplyees and department for each emplyee
+                return Data;
+            }
+               
         }
 
         public Employee GetById(int id)
