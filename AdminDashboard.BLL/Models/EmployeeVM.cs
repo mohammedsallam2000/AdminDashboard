@@ -31,7 +31,7 @@ namespace AdminDashboard.BLL.Models
         public DateTime HireDate { get; set; }
         public DateTime CreationDate { get; set; }
         //11StreetName-CityName-CountryName
-        [RegularExpression("[0-9]{1,10}-[a-zA-Z]{1,20}-[a-zA-Z]{1,20}-[a-zA-Z]{1,20}", ErrorMessage = "Address must like 11StreetName-CityName-CountryName")]
+        [RegularExpression("[0-9]{1,10}-[a-zA-Z]{1,50}-[a-zA-Z]{1,50}-[a-zA-Z]{1,50}", ErrorMessage = "Address Must Like : 12-StreetName-CityName-CountryName")]
         public string Address { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsActive { get; set; }

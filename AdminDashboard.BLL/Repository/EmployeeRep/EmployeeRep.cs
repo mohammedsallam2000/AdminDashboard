@@ -53,9 +53,9 @@ namespace AdminDashboard.BLL.Repository.EmployeeRep
                
         }
 
-        public Employee GetById(int id)
+        public Employee GetById(Expression<Func<Employee, bool>> filter = null)
         {
-            var Data = db.Employee.Where(x => x.Id == id).FirstOrDefault();
+            var Data = db.Employee.Where(filter).FirstOrDefault();
             return Data;
         }
 

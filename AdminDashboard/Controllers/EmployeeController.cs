@@ -4,6 +4,7 @@ using AdminDashboard.BLL.Repository.EmployeeRep;
 using AdminDashboard.DAL.Entity;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace AdminDashboard.Controllers
         #region Actions
         public IActionResult Index()
         {
-            var data = employee.Get();
+            var data = employee.Get(x=>x.IsDeleted == false && x.IsActive == true);
             var model = mapper.Map<IEnumerable<EmployeeVM>>(data);
             return View(model);
         }
@@ -41,6 +42,7 @@ namespace AdminDashboard.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Departments = new SelectList(department.Get(), "Id", "Name");
             return View();
         }
         [HttpPost]
@@ -54,10 +56,14 @@ namespace AdminDashboard.Controllers
                     employee.Create(data);
                     return RedirectToAction("Index");
                 }
+                ViewBag.Departments = new SelectList(department.Get(), "Id", "Name");
+
                 return View(model);
             }
             catch (Exception)
             {
+                ViewBag.Departments = new SelectList(department.Get(), "Id", "Name");
+
                 return View(model);
             }
         }
@@ -65,8 +71,10 @@ namespace AdminDashboard.Controllers
 
         public IActionResult Details(int id)
         {
-            var data = employee.GetById(id);
+            var data = employee.GetById(x => x.Id == id && x.IsDeleted == false && x.IsActive == true);
             var model = mapper.Map<EmployeeVM>(data);
+            ViewBag.Departments = new SelectList(department.Get(), "Id", "Name",model.DepartmentId);
+
             return View(model);
         }
 
@@ -74,7 +82,7 @@ namespace AdminDashboard.Controllers
 
         public IActionResult Edit(int id)
         {
-            var data = employee.GetById(id);
+            var data = employee.GetById(x => x.Id == id && x.IsDeleted == false && x.IsActive == true);
             var model = mapper.Map<EmployeeVM>(data);
             return View(model);
         }
@@ -99,7 +107,7 @@ namespace AdminDashboard.Controllers
 
         public IActionResult Delete(int id)
         {
-            var data = employee.GetById(id);
+            var data = employee.GetById(x => x.Id == id && x.IsDeleted == false && x.IsActive == true);
             var model = mapper.Map<EmployeeVM>(data);
             return View(model);
         }
