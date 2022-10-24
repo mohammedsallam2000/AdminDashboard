@@ -1,24 +1,40 @@
-﻿@model AdminDashboard.BLL.Models.DepartmentsVM
-
+﻿@model AdminDashboard.BLL.Models.EmployeeVM
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Employee";
 }
 
-<h2>Delete Department</h2>
-
-<br />
+<h2>Delete Employee</h2>
 <center>
-    <h3 class="text-danger">Are you sure to delete this department !</h3>
+    <h3 class="text-danger">Are you sure to delete this Employee !</h3>
 </center>
-<br />
-<form  asp-action="Delete" asp-controller="Department" method="post">
+<form asp-action="Delete" asp-controller="Employee" method="post">
 
-    <input type="hidden" asp-for="Id" />
-    <label for="DepartmentName">Department Name</label>
-    <input type="text" class="form-control" id="DepartmentName" name="Name" value="@Model.Name" disabled />
+    <label asp-for="Name">Name</label>
+
+    <input type="text" class="form-control" id="Name" asp-for="Name" disabled />
     <br />
-    <label for="DepartmentCode">Department Code</label>
-    <input type="text" class="form-control" id="DepartmentCode" name="Code" value="@Model.Code" disabled/>
+    <label asp-for="Salary">Salary</label>
+    <input type="text" class="form-control" asp-for="Salary" id="Salary" disabled />
+    <br />
+    <label asp-for="Email">Email</label>
+    <input type="text" class="form-control" asp-for="Email" id="Email" disabled />
+    <br />
+    <label asp-for="HireDate">Hire Date</label>
+    <input type="date" class="form-control" asp-for="HireDate" id="HireDate" disabled />
+    <br />
+
+    <label asp-for="Address">Address</label>
+    <input type="text" class="form-control" asp-for="Address" id="HireDate" disabled />
+    <br />
+    <div class="demo-checkbox">
+        <input type="checkbox" asp-for="IsActive" checked="" disabled>
+        <label asp-for="IsActive">IsActive</label>
+
+    </div>
+    <br />
+
+    <select asp-for="DepartmentId" asp-items="(SelectList)ViewBag.Departments" disabled>
+    </select>
     <br />
     <center>
 

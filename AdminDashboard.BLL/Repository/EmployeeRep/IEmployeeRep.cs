@@ -11,6 +11,8 @@ namespace AdminDashboard.BLL.Repository.EmployeeRep
     public interface IEmployeeRep
     {
         IEnumerable<Employee> Get(Expression<Func<Employee, bool>> filter = null);
+        IEnumerable<Employee> Search(Expression<Func<Employee, bool>> filter = null);
+
         Employee GetById(Expression<Func<Employee, bool>> filter = null);
         void Create(Employee model);
         void Edit(Employee model);

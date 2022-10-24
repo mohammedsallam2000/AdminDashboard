@@ -55,7 +55,7 @@ namespace AdminDashboard.BLL.Repository.EmployeeRep
 
         public Employee GetById(Expression<Func<Employee, bool>> filter = null)
         {
-            var Data = db.Employee.Where(filter).FirstOrDefault();
+            var Data = db.Employee.Include("Departments").Where(filter).FirstOrDefault();
             return Data;
         }
 
@@ -63,6 +63,12 @@ namespace AdminDashboard.BLL.Repository.EmployeeRep
         {
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
+        }
+
+        public IEnumerable<Employee> Search(Expression<Func<Employee, bool>> filter = null)
+        {
+            var data = db.Employee.Include("Departments").Where(filter);
+            return data;
         }
     }
 }

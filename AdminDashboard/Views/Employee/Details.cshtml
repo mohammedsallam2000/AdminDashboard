@@ -24,19 +24,19 @@
 <input type="text" class="form-control" asp-for="Address" id="HireDate" disabled />
 <br />
 <div class="demo-checkbox">
-    <input type="checkbox" asp-for="IsActive" checked="" readonly>
+    <input type="checkbox" asp-for="IsActive" checked="" disabled>
     <label asp-for="IsActive">IsActive</label>
    
 </div>
 <br />
 
-<select asp-for="DepartmentId" asp-items="(SelectList)ViewBag.Departments">
+<select asp-for="DepartmentId" asp-items="(SelectList)ViewBag.Departments" disabled>
 </select>
 <br />
 
 <center>
     <a asp-controller="Employee" asp-action="Index" class="btn btn-primary">Back</a>
-    <a asp-controller="Employee" asp-action="Update" asp-route-id="@Model.Id" class="btn btn-info">Edit</a>
+    <a asp-controller="Employee" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info">Edit</a>
     <a asp-controller="Employee" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
 
 

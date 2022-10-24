@@ -32,11 +32,20 @@ namespace AdminDashboard.Controllers
         #endregion
 
         #region Actions
-        public IActionResult Index()
+        public IActionResult Index(string SearchValue)
         {
-            var data = employee.Get(x=>x.IsDeleted == false && x.IsActive == true);
-            var model = mapper.Map<IEnumerable<EmployeeVM>>(data);
-            return View(model);
+            if (SearchValue == null)
+            {
+                var data = employee.Get(x => x.IsDeleted == false && x.IsActive == true);
+                var model = mapper.Map<IEnumerable<EmployeeVM>>(data);
+                return View(model);
+            }
+            else
+            {
+                var data = employee.Search(x => x.Name == SearchValue || x.Email == SearchValue || x.Address == SearchValue || x.Salary.ToString() == SearchValue || x.Departments.Name == SearchValue);
+                var model = mapper.Map<IEnumerable<EmployeeVM>>(data);
+                return View(model);
+            }
         }
 
 
@@ -84,6 +93,8 @@ namespace AdminDashboard.Controllers
         {
             var data = employee.GetById(x => x.Id == id && x.IsDeleted == false && x.IsActive == true);
             var model = mapper.Map<EmployeeVM>(data);
+            ViewBag.Departments = new SelectList(department.Get(), "Id", "Name", model.DepartmentId);
+
             return View(model);
         }
         [HttpPost]
@@ -97,10 +108,14 @@ namespace AdminDashboard.Controllers
                     employee.Edit(data);
                     return RedirectToAction("Index");
                 }
+                ViewBag.Departments = new SelectList(department.Get(), "Id", "Name", model.DepartmentId);
+
                 return View(model);
             }
             catch (Exception)
             {
+                ViewBag.Departments = new SelectList(department.Get(), "Id", "Name", model.DepartmentId);
+
                 return View(model);
             }
         }
@@ -109,6 +124,8 @@ namespace AdminDashboard.Controllers
         {
             var data = employee.GetById(x => x.Id == id && x.IsDeleted == false && x.IsActive == true);
             var model = mapper.Map<EmployeeVM>(data);
+            ViewBag.Departments = new SelectList(department.Get(), "Id", "Name", model.DepartmentId);
+
             return View(model);
         }
         [HttpPost]
@@ -122,6 +139,8 @@ namespace AdminDashboard.Controllers
             }
             catch (Exception)
             {
+                ViewBag.Departments = new SelectList(department.Get(), "Id", "Name", model.DepartmentId);
+
                 return View(model);
             }
         }

@@ -1,31 +1,60 @@
-﻿@model AdminDashboard.BLL.Models.DepartmentsVM
+﻿@model AdminDashboard.BLL.Models.EmployeeVM
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewBag.Title = "Edit";
+
 }
 
-<h2>Edit Department</h2>
+<h2>Edit Employee</h2>
 
-<form  asp-action="Update" asp-controller="Department" method="post">
+<form asp-action="Edit" asp-controller="Employee" method="post">
 
-    <input type="hidden" asp-for="Id" /><br />
-    <label for="DepartmentName">Department Name</label>
-    <input type="text" class="form-control" id="DepartmentName" name="Name" value="@Model.Name" />
+
+    <input type="hidden"  asp-for="Id"  />
+    <br />
+    <br />
+    <label asp-for="Name">Name</label>
+
+    <input type="text" class="form-control" asp-for="Name" />
     <span asp-validation-for="Name" class="text-danger"></span>
+    <br /><br />
+    <label asp-for="Salary">Salary</label>
+    <input type="text" class="form-control" asp-for="Salary" id="Salary" />
+    <span asp-validation-for="Salary" class="text-danger"></span>
     <br />
-    <label for="DepartmentCode">Department Code</label>
-    <input type="text" class="form-control" id="DepartmentCode" name="Code" value="@Model.Code" />
-    <span asp-validation-for="Code" class="text-danger"></span>
+    <label asp-for="Email">Email</label>
+    <input type="text" class="form-control" asp-for="Email" />
+    <span asp-validation-for="Email" class="text-danger"></span>
     <br />
-    <center>
+    <label asp-for="HireDate">Hire Date</label>
+    <input type="date" class="form-control" asp-for="HireDate"  />
+    <span asp-validation-for="HireDate" class="text-danger"></span>
+    <br />
 
-        <input type="submit" class="btn btn-primary" value="Edit" />
+    <label asp-for="Address">Address</label>
+    <input type="text" class="form-control" asp-for="Address"  />
+    <span asp-validation-for="Address" class="text-danger"></span>
+    <br />
+    <div class="demo-checkbox">
+        <input type="checkbox" asp-for="IsActive" checked="">
+        <label asp-for="IsActive">IsActive</label>
+        <span asp-validation-for="IsActive" class="text-danger"></span>
+    </div>
+    <br />
+
+    <select class="form-control" asp-for="DepartmentId" asp-items="(SelectList)ViewBag.Departments">
+
+        <option>Choose Department</option>
+    </select>
+    <center>
+        <br /><br />
+        <input type="submit" class="btn btn-primary" value="Save" />
     </center>
 
 </form>
 
-@section JqueryValidation{
-
-    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
-    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}
+@*@section JqueryValidation{*@
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+<script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+@*}*@
