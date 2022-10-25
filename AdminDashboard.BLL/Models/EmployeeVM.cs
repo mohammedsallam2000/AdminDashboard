@@ -40,5 +40,8 @@ namespace AdminDashboard.BLL.Models
         // Navigation property
         [ForeignKey("DepartmentId")]
         public Departments Departments { get; set; }
+        public int DistrictId { get; set; }
+
+        public District District { get; set; }
     }
 }

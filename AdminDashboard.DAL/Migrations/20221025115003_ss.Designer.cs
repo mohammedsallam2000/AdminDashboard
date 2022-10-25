@@ -4,14 +4,16 @@ using AdminDashboard.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminDashboard.DAL.Migrations
 {
     [DbContext(typeof(AdminDashboardContext))]
-    partial class AdminDashboardContextModelSnapshot : ModelSnapshot
+    [Migration("20221025115003_ss")]
+    partial class ss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

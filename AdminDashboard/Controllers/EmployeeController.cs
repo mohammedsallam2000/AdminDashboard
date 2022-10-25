@@ -1,5 +1,7 @@
 ﻿using AdminDashboard.BLL.Models;
+using AdminDashboard.BLL.Repository.CityRep;
 using AdminDashboard.BLL.Repository.DepartmentRepo;
+using AdminDashboard.BLL.Repository.DistrictRep;
 using AdminDashboard.BLL.Repository.EmployeeRep;
 using AdminDashboard.DAL.Entity;
 using AutoMapper;
@@ -18,15 +20,18 @@ namespace AdminDashboard.Controllers
         // Losly Coupled
         private readonly IEmployeeRep employee;
         private readonly IDepartmentRep department;
-
+        private readonly ICityRep city;
+        private readonly IDistrictRep district;
         private readonly IMapper mapper;
         #endregion
 
         #region Ctor
-        public EmployeeController(IEmployeeRep employee,IDepartmentRep department, IMapper mapper)
+        public EmployeeController(IEmployeeRep employee,IDepartmentRep department, ICityRep city, IDistrictRep district, IMapper mapper)
         {
             this.employee = employee;
             this.department = department;
+            this.city = city;
+            this.district = district;
             this.mapper = mapper;
         }
         #endregion
@@ -144,6 +149,28 @@ namespace AdminDashboard.Controllers
                 return View(model);
             }
         }
+        #endregion
+
+        #region Ajax Call 
+
+        // Get City Data By CountryId
+        [HttpPost]
+        public JsonResult GetCityByCountryId(int CountryId)
+        {
+            var data = city.Get(x=>x.CountryId == CountryId);
+            var model = mapper.Map<IEnumerable<CityVM>>(data);
+            return Json(model);
+        }
+
+        // Get Country Data By CityId
+        [HttpPost]
+        public JsonResult GetDistrictByCityId(int CityId)
+        {
+            var data = district.Get(x => x.CityId == CityId);
+            var model = mapper.Map<IEnumerable<DistrictVM>>(data);
+            return Json(model);
+        }
+
         #endregion
     }
 }

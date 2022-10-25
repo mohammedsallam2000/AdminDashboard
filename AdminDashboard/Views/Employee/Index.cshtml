@@ -88,6 +88,8 @@
                                     <th>Name</th>
                                     <th>Salary</th>
                                     <th>Department</th>
+                                    <th>District</th>
+
                                     @*<th>District</th>*@
                                     <th>Details</th>
                                     <th>Update</th>
@@ -97,16 +99,18 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <td>@item.Id</td>
-                                        <td>@item.Name</td>
-                                        <td>@item.Salary</td>
-                                        <td>@item.Departments.Name</td>
-                                        @*<td>@item.District.Name</td>*@
-                                        <td><a asp-action="Details" asp-controller="Employee" asp-route-id="@item.Id" class="btn btn-info">Details</a></td>
-                                        <td><a asp-action="Edit" asp-controller="Employee" asp-route-id="@item.Id" class="btn btn-warning">Edit</a></td>
-                                        <td><a asp-action="Delete" asp-controller="Employee" asp-route-id="@item.Id" class="btn btn-danger">Delete</a></td>
-                                    </tr>
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Salary</td>
+                                    <td>@item.Departments.Name</td>
+                                    <td>@item.District.Name</td>
+
+                                    @*<td>@item.District.Name</td>*@
+                                    <td><a asp-action="Details" asp-controller="Employee" asp-route-id="@item.Id" class="btn btn-info">Details</a></td>
+                                    <td><a asp-action="Edit" asp-controller="Employee" asp-route-id="@item.Id" class="btn btn-warning">Edit</a></td>
+                                    <td><a asp-action="Delete" asp-controller="Employee" asp-route-id="@item.Id" class="btn btn-danger">Delete</a></td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

@@ -27,6 +27,10 @@ namespace AdminDashboard.DAL.Entity
         // Navigation property
         [ForeignKey("DepartmentId")]
         public Departments Departments { get; set; }
+        public int DistrictId { get; set; }
+
+        [ForeignKey("DistrictId")]
+        public District District { get; set; }
 
     }
 }

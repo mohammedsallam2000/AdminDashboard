@@ -1,5 +1,5 @@
 ﻿@model AdminDashboard.BLL.Models.EmployeeVM
-
+@inject AdminDashboard.BLL.Repository.CountryRep.ICountryRep country
 @{
     ViewBag.Title = "Create";
 
@@ -38,11 +38,32 @@
         <span asp-validation-for="IsActive" class="text-danger"></span>
     </div>
     <br />
-
-    <select asp-for="DepartmentId" asp-items="(SelectList)ViewBag.Departments">
-
+    <select asp-for="DepartmentId" asp-items="(SelectList)ViewBag.Departments" class="form-control">
         <option>Choose Department</option>
     </select>
+    <br /><br />
+    <select id="CountryList" class="form-control">
+
+        <option>Choose Country</option>
+        @foreach (var item in country.Get())
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+
+    <br /><br />
+    <select id="CityList" class="form-control">
+
+        <option>Choose City</option>
+    </select>
+
+    <br /><br />
+
+    <select asp-for="DistrictId" class="form-control">
+
+        <option>Choose District</option>
+    </select>
+    <br /><br />
     <center>
 
         <input type="submit" class="btn btn-primary" value="Save" />
@@ -50,8 +71,37 @@
 
 </form>
 
-@*@section JqueryValidation{*@
+@section JqueryValidation{
     <script src="~/plugins/jquery/jquery.min.js"></script>
     <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
     <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-@*}*@
+
+    <script>
+
+        $(function () {
+
+            $('#CountryList').change(function () {
+
+                var CountryId = $('#CountryList option:selected').val();
+
+                $.ajax({
+
+                    type: "post",
+                    url: "/Emplyee/GetCityByCountryId",
+                    data: { CountryId: CountryId },
+                    success: function (res) {
+
+                    }
+
+                })
+
+            })
+
+
+        })
+
+    </script>
+
+
+
+}

@@ -4,14 +4,16 @@ using AdminDashboard.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminDashboard.DAL.Migrations
 {
     [DbContext(typeof(AdminDashboardContext))]
-    partial class AdminDashboardContextModelSnapshot : ModelSnapshot
+    [Migration("20221025113410_Ajax_Migration")]
+    partial class Ajax_Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +113,7 @@ namespace AdminDashboard.DAL.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DistrictId")
+                    b.Property<int?>("DistrictId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -175,9 +177,7 @@ namespace AdminDashboard.DAL.Migrations
 
                     b.HasOne("AdminDashboard.DAL.Entity.District", "District")
                         .WithMany("Employee")
-                        .HasForeignKey("DistrictId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DistrictId");
 
                     b.Navigation("Departments");
 

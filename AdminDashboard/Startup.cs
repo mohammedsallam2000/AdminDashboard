@@ -1,6 +1,9 @@
 using AdminDashboard.BLL.AutoMapper;
 using AdminDashboard.BLL.Repository;
+using AdminDashboard.BLL.Repository.CityRep;
+using AdminDashboard.BLL.Repository.CountryRep;
 using AdminDashboard.BLL.Repository.DepartmentRepo;
+using AdminDashboard.BLL.Repository.DistrictRep;
 using AdminDashboard.BLL.Repository.EmployeeRep;
 using AdminDashboard.DAL.Database;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +32,10 @@ namespace AdminDashboard
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(opt => {
+                opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
+            
             //To get Connection String
             services.AddDbContextPool<AdminDashboardContext>(opts =>
             opts.UseSqlServer(Configuration.GetConnectionString("AdminDashboardConnection")));
@@ -37,6 +44,9 @@ namespace AdminDashboard
 
             services.AddScoped<IDepartmentRep, DepartmentRep>();
             services.AddScoped<IEmployeeRep, EmployeeRep>();
+            services.AddScoped<ICountryRep, CountryRep>();
+            services.AddScoped<ICityRep, CityRep>();
+            services.AddScoped<IDistrictRep, DistrictRep>();
 
         }
 

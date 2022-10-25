@@ -42,12 +42,12 @@ namespace AdminDashboard.BLL.Repository.EmployeeRep
         {
             if (filter == null )
             {
-                var Data = db.Employee.Include("Departments").Select(x => x); // Get All Emplyees and department for each emplyee
+                var Data = db.Employee.Include("Departments").Include("District").Select(x => x); // Get All Emplyees and department for each emplyee
                 return Data;
             }
             else
             {
-                var Data = db.Employee.Include("Departments").Where(filter); // Get All Emplyees and department for each emplyee
+                var Data = db.Employee.Include("Departments").Include("District").Where(filter); // Get All Emplyees and department for each emplyee
                 return Data;
             }
                
@@ -55,7 +55,7 @@ namespace AdminDashboard.BLL.Repository.EmployeeRep
 
         public Employee GetById(Expression<Func<Employee, bool>> filter = null)
         {
-            var Data = db.Employee.Include("Departments").Where(filter).FirstOrDefault();
+            var Data = db.Employee.Include("Departments").Include("District").Where(filter).FirstOrDefault();
             return Data;
         }
 
@@ -67,7 +67,7 @@ namespace AdminDashboard.BLL.Repository.EmployeeRep
 
         public IEnumerable<Employee> Search(Expression<Func<Employee, bool>> filter = null)
         {
-            var data = db.Employee.Include("Departments").Where(filter);
+            var data = db.Employee.Include("Departments").Include("District").Where(filter);
             return data;
         }
     }

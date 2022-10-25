@@ -18,6 +18,16 @@ namespace AdminDashboard.BLL.AutoMapper
 
             CreateMap<Employee, EmployeeVM>();
             CreateMap<EmployeeVM, Employee>();
+
+            CreateMap<City, CityVM>();
+            CreateMap<CityVM, City>();
+
+            CreateMap<Country, CountryVM>();
+            CreateMap<Country, CountryVM>();
+
+
+            CreateMap<District, DistrictVM>();
+            CreateMap<DistrictVM, District>();
         }
 
 
