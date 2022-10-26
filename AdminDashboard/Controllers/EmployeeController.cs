@@ -155,18 +155,18 @@ namespace AdminDashboard.Controllers
 
         // Get City Data By CountryId
         [HttpPost]
-        public JsonResult GetCityByCountryId(int CountryId)
+        public JsonResult GetCityByCountryId(int CntryId)
         {
-            var data = city.Get(x=>x.CountryId == CountryId);
+            var data = city.Get(x=>x.CountryId == CntryId);
             var model = mapper.Map<IEnumerable<CityVM>>(data);
             return Json(model);
         }
 
         // Get Country Data By CityId
         [HttpPost]
-        public JsonResult GetDistrictByCityId(int CityId)
+        public JsonResult GetDistrictByCityId(int CtyId)
         {
-            var data = district.Get(x => x.CityId == CityId);
+            var data = district.Get(x => x.CityId == CtyId);
             var model = mapper.Map<IEnumerable<DistrictVM>>(data);
             return Json(model);
         }

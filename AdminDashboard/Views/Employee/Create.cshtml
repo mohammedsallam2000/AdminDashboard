@@ -43,26 +43,26 @@
     </select>
     <br /><br />
     <select id="CountryList" class="form-control">
-
         <option>Choose Country</option>
         @foreach (var item in country.Get())
         {
-            <option value="@item.Id">@item.Name</option>
+            <option value="@item.Id">
+                @item.Name
+            </option>
         }
     </select>
+    <br />
 
-    <br /><br />
+
     <select id="CityList" class="form-control">
-
         <option>Choose City</option>
     </select>
-
-    <br /><br />
+    <br />
 
     <select asp-for="DistrictId" class="form-control">
-
         <option>Choose District</option>
     </select>
+    <br />
     <br /><br />
     <center>
 
@@ -80,24 +80,58 @@
 
         $(function () {
 
-            $('#CountryList').change(function () {
+            $("#CountryList").change(function () {
 
-                var CountryId = $('#CountryList option:selected').val();
+                var CountryId = $("#CountryList option:selected").val();
+
+                $("#CityList").empty();
+                $("#CityList").append("<option>Choose City</option>");
+
 
                 $.ajax({
 
-                    type: "post",
-                    url: "/Emplyee/GetCityByCountryId",
-                    data: { CountryId: CountryId },
+                    type: "POST",
+                    url: "/Employee/GetCityDataByCountryId",
+                    data: { CntryId: CountryId },
                     success: function (res) {
 
+                        $.each(res, function (i, e) {
+
+                            $("#CityList").append("<option value='" + e.id + "'>" + e.name + "</option>");
+
+                        });
                     }
 
-                })
+                });
 
-            })
+            });
 
 
+            $("#CityList").change(function () {
+
+                var CityId = $("#CityList option:selected").val();
+
+                $("#DistrictId").empty();
+                $("#DistrictId").append("<option>Choose District</option>");
+
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "/Employee/GetDistrictDataByCityId",
+                    data: { CtyId: CityId },
+                    success: function (res) {
+
+                        $.each(res, function (i, e) {
+
+                            $("#DistrictId").append("<option value='" + e.id + "'>" + e.name + "</option>");
+
+                        });
+                    }
+
+                });
+
+            });
         })
 
     </script>
